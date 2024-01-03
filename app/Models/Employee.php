@@ -10,25 +10,37 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $guards = [];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'middle_name',
+        'address',
+        'country_id',
+        'state_id',
+        'city_id',
+        'department_id',
+        'zip_code',
+        'birth_date',
+        'date_hired',
+    ];
 
-    public function country():BelongsTo
+    public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class);
     }
 
-    public function state():BelongsTo
+    public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);
     }
 
-    public function city():BelongsTo
+    public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
 
 
-    public function department():BelongsTo
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
     }

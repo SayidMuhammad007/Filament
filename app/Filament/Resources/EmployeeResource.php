@@ -36,7 +36,7 @@ class EmployeeResource extends Resource
                         ->searchable()
                         ->preload()
                         ->live()
-                        ->afterStateUpdated(function (Set $set){
+                        ->afterStateUpdated(function (Set $set) {
                             $set('state_id', null);
                             $set('city_id', null);
                         })
@@ -45,7 +45,7 @@ class EmployeeResource extends Resource
                         ->required()
                         ->searchable()
                         ->live()
-                        ->afterStateUpdated(function (Set $set){
+                        ->afterStateUpdated(function (Set $set) {
                             $set('city_id', null);
                         })
                         ->options(fn (Get $get): Collection => State::query()
@@ -60,6 +60,7 @@ class EmployeeResource extends Resource
                             ->pluck('name', 'id')),
                     Forms\Components\Select::make('department_id')
                         ->required()
+                        ->preload()
                         ->searchable()
                         ->relationship(name: 'department', titleAttribute: "name"),
                 ])->columns(2),
@@ -85,8 +86,10 @@ class EmployeeResource extends Resource
 
                 Forms\Components\Section::make("Dates")->schema([
                     Forms\Components\DatePicker::make('birth_date')
+                        ->native(false)
                         ->required(),
                     Forms\Components\DatePicker::make('date_hired')
+                        ->native(false)
                         ->required(),
                 ])->columns(2),
             ]);
@@ -96,7 +99,7 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('contry_id')
+                Tables\Columns\TextColumn::make('country_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('state_id')
