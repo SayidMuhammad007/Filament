@@ -27,7 +27,7 @@ class CountryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                
             ]);
     }
 
