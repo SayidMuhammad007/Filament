@@ -31,7 +31,7 @@ class StateResource extends Resource
                     ->required()
                     ->searchable()
                     ->preload()
-                    ->relationship(name:'country', titleAttribute:"name"),
+                    ->relationship(name: 'country', titleAttribute: "name"),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -42,19 +42,12 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('contry_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('country.name')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()
             ])
             ->filters([
                 //
